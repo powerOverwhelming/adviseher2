@@ -1,8 +1,8 @@
 # coding: utf-8
 
-from django.conf.urls import patterns, include, url
+from django.conf.urls import url
 from bootcamp.matchmaking import views
 
 urlpatterns = [
-    url(r'^$', views.matches, name='matchmaking'),
+    url(r'^match$', views.matches, name='matchmaking'),
 ]
