@@ -1,24 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
-
 {% extends 'base.html' %}
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script
-          src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
-  </script>
-  <script
-          src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
-  </script>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 50%;
+      margin: auto;
+      height: 100%;
+  }
+  </style>
 </head>
-
 <body>
+{% block head %}
+
 <div class="container">
   <br>
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
     <!-- Indicators -->
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -27,15 +31,20 @@
       <li data-target="#myCarousel" data-slide-to="3"></li>
     </ol>
 
-    <!-- Wrapper for slides -->
-      {% for match in  matches%}
+        <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
-      <div class="item active">
-        <p> match.first </p>
-      </div>
+        {% for match in matches %}
+            <div class="item{% if forloop.first %} active{% endif %}">
+                  <img src="{{match.profile.get_picture}}" alt="Chania" width="460" height="345">
+                  <div class="carousel-caption capt">
+                      <h2>Full Name: {{ match.get_full_name }}</h2>
+                      <h2>Job Title: {{match.profile.job_title}}</h2>
+                      <h2>Screen Name: {{ match.profile.get_screen_name }}</h2>
+                  </div>
+            </div>
+        {%endfor%}
     </div>
 
-      {% endfor %}
 
     <!-- Left and right controls -->
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -48,5 +57,9 @@
     </a>
   </div>
 </div>
+
+{% endblock head %}
+
 </body>
 </html>
+
