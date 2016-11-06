@@ -9,6 +9,7 @@ from bootcamp.core import views as core_views
 from bootcamp.authentication import views as bootcamp_auth_views
 from bootcamp.activities import views as activities_views
 from bootcamp.search import views as search_views
+from bootcamp.matchmaking import views as matchmaking_views
 
 
 urlpatterns = [
@@ -38,6 +39,7 @@ urlpatterns = [
     url(r'^search/$', search_views.search, name='search'),
     url(r'^(?P<username>[^/]+)/$', core_views.profile, name='profile'),
     url(r'^i18n/', include('django.conf.urls.i18n', namespace='i18n')),
+    url(r'^matchmaking/', include('bootcamp.matchmaking.urls')),
 ]
 
 if settings.DEBUG:
